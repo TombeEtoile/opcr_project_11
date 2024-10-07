@@ -1,0 +1,32 @@
+<header>
+
+    <nav class="navbar bg-dark border-bottom border-body" data-bs-theme="dark">
+        <div class="container-fluid">
+            <div class="d-flex">
+                <!-- Boutons de navigation à gauche -->
+                {% if session.get('email') %}
+                    <a href="{{ url_for('homepage') }}" class="btn btn-light mx-2" role="button">Accueil</a>
+                {% endif %}
+                {% if request.path != '/clubs' %}
+                    <a href="{{ url_for('clubs_list') }}" class="btn btn-light mx-2" role="button">Clubs list</a>
+                {% endif %}
+                {% if session.get('email') %}
+                    <a href="{{ url_for('logout') }}" class="btn btn-light mx-2" role="button">Logout</a>
+                {% endif %}
+                {% if not session.get('email') %}
+                    {% if request.path != '/' %}
+                        <a href="{{ url_for('registration') }}" class="btn btn-light mx-2" role="button">I register</a>
+                    {% endif %}
+                {% endif %}
+            </div>
+
+            <!-- Bouton des points du club à droite -->
+            {% if session.get('email') %}
+                <a href="#" class="btn btn-light ms-auto" role="button">*club['points']*</a>
+            {% else %}
+                <a href="#" class="btn btn-light ms-auto" role="button">**register**</a>
+            {% endif %}
+        </div>
+    </nav>
+
+</header>

@@ -1,16 +1,69 @@
-{"clubs":[
-    {
-        "name":"Simply Lift",
-        "email":"john@simplylift.co",
-        "points":"13"
-    },
-    {
-        "name":"Iron Temple",
-        "email": "admin@irontemple.com",
-        "points":"4"
-    },
-    {   "name":"She Lifts",
-        "email": "kate@shelifts.co.uk",
-        "points":"12"
-    }
-]}
+{
+    "clubs": [
+        {
+            "name": "Simply Lift",
+            "email": "john@simplylift.co",
+            "points": 3
+        },
+        {
+            "name": "Iron Temple",
+            "email": "admin@irontemple.com",
+            "points": 4
+        },
+        {
+            "name": "She Lifts",
+            "email": "kate@shelifts.co.uk",
+            "points": 12
+        },
+        {
+            "name": "Powerhouse Gym",
+            "email": "info@powerhousegym.com",
+            "points": 8
+        },
+        {
+            "name": "The Muscle Factory",
+            "email": "contact@musclefactory.com",
+            "points": 10
+        },
+        {
+            "name": "Strong Arms",
+            "email": "hello@strongarms.com",
+            "points": 15
+        },
+        {
+            "name": "Beast Mode",
+            "email": "beast@beastmode.com",
+            "points": 6
+        },
+        {
+            "name": "The Fitness Hub",
+            "email": "info@fitnesshub.com",
+            "points": 9
+        },
+        {
+            "name": "Lift Heavy",
+            "email": "contact@liftheavy.com",
+            "points": 7
+        },
+        {
+            "name": "Power Surge",
+            "email": "powersurge@powersurge.com",
+            "points": 14
+        },
+        {
+            "name": "Endurance Gym",
+            "email": "info@endurancegym.com",
+            "points": 11
+        },
+        {
+            "name": "Fit Nation",
+            "email": "support@fitnation.com",
+            "points": 5
+        },
+        {
+            "name": "Peak Performance",
+            "email": "info@peakperformance.com",
+            "points": 13
+        }
+    ]
+}

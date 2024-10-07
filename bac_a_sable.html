@@ -1,0 +1,99 @@
+NAVBAR
+
+    <nav>
+        <ul>
+            {% if session.get('email') %}
+                <li><a href="{{ url_for('homepage') }}">Accueil</a></li>
+            {% endif %}
+            <li><a href="{{ url_for('clubs_list') }}">Clubs list</a></li>
+            {% if session.get('email') %}
+                <li><a href="{{ url_for('logout') }}">Logout</a></li>
+            {% endif %}
+            {% if not session.get('email') %}
+                {% if request.path != '/' %}
+                    <li><a href="{{ url_for('registration') }}">I register</a></li>
+                {% endif %}
+            {% endif %}
+        </ul>
+    </nav>
+
+
+NAVBAR 2
+
+   <nav class="navbar bg-dark border-bottom border-body" data-bs-theme="dark">
+        <div class="d-flex me-4">
+            {% if session.get('email') %}
+                <a href="{{ url_for('homepage') }}" class="btn btn-light mx-2" role="button">Accueil</a>
+            {% endif %}
+            {% if request.path != '/clubs' %}
+                <a href="{{ url_for('clubs_list') }}" class="btn btn-light mx-2" role="button">Clubs list</a>
+            {% endif %}
+            {% if session.get('email') %}
+                <a href="{{ url_for('logout') }}" class="btn btn-light mx-2" role="button">Logout</a>
+            {% endif %}
+            {% if not session.get('email') %}
+                {% if request.path != '/' %}
+                    <a href="{{ url_for('registration') }}" class="btn btn-light mx-2" role="button">I register</a>
+                {% endif %}
+            {% endif %}
+            {% if session.get('email') %}
+                <a href="#" class="btn btn-light mx-2" role="button">*{{ club['points'] }}*</a>
+            {% endif %}
+        </div>
+    </nav>
+
+
+FORM
+
+    <form action="/" method="post">
+        <label for="email">Email:</label>
+        <input type="email" name="email" id=""/>
+        <button type="submit">Enter</button>
+    </form>
+
+
+LIST COMPETITION HOMEPAGE
+
+<ul>
+        {% for competition in competitions %}
+            <li>
+                {{ competition['name'] }}
+                <br>Date: {{ competition['date'] }}<br>
+                Number of Places: {{ competition['available_places'] }}
+                {% if competition['available_places']|int > 0 %}
+                    {% if competition['name'] and club['name'] %}
+                        <a href="{{ url_for('book', competition=competition['name']|slugify, club=club['name']|slugify) }}">Book
+                            places</a>
+                    {% endif %}
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+
+
+BOOKING
+
+    <div class="card mx-3 border-0 justify-content-center">
+        <h2>{{ competition['name'] }}</h2>
+        Places available for {{ competition['name'] }}: {{ competition['available_places'] }}<br>
+        Your number of points: {{ club['points'] }}
+
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul>
+                    {% for message in messages %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+
+        <form action="/booking" method="post">
+            <input type="hidden" name="club" value="{{ club['name'] }}">
+            <input type="hidden" name="competition" value="{{ competition['name'] }}">
+            <label for="places">How many places do you want to reserve?</label><input type="number" min="0"
+                                                                                      name="places" id=""/>
+            <button type="submit">Book</button>
+        </form>
+    </div>
+

@@ -1,0 +1,14 @@
+<footer>
+
+    <div class="card text-center">
+        <div class="card-header">&copy; 2024 GUDLFT - Tous droits réservés</div>
+        <div class="card-body">
+            <h5 class="card-title">GUDLFT</h5>
+            <p class="card-text">Reserve your places in all competitions on the website www.gudlft.com</p>
+            {% if session.get('email') %}
+                <a href="/homepage" class="btn btn-primary">Homepage</a>
+            {% endif %}
+        </div>
+    </div>
+
+</footer>

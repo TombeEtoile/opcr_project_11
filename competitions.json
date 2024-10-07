@@ -3,12 +3,62 @@
         {
             "name": "Spring Festival",
             "date": "2020-03-27 10:00:00",
-            "numberOfPlaces": "25"
+            "available_places": 21
         },
         {
             "name": "Fall Classic",
             "date": "2020-10-22 13:30:00",
-            "numberOfPlaces": "13"
+            "available_places": 9
+        },
+        {
+            "name": "Winter Showdown",
+            "date": "2021-01-15 09:00:00",
+            "available_places": 15
+        },
+        {
+            "name": "Summer Sizzle",
+            "date": "2021-07-10 14:00:00",
+            "available_places": 18
+        },
+        {
+            "name": "Autumn Assault",
+            "date": "2021-09-30 11:30:00",
+            "available_places": 12
+        },
+        {
+            "name": "Iron Warrior",
+            "date": "2021-11-05 16:00:00",
+            "available_places": 10
+        },
+        {
+            "name": "Beast Battle",
+            "date": "2022-02-18 08:00:00",
+            "available_places": 20
+        },
+        {
+            "name": "Power Clash",
+            "date": "2022-05-22 13:00:00",
+            "available_places": 25
+        },
+        {
+            "name": "Strength Summit",
+            "date": "2022-08-12 10:30:00",
+            "available_places": 30
+        },
+        {
+            "name": "Endurance Challenge",
+            "date": "2022-10-05 12:45:00",
+            "available_places": 14
+        },
+        {
+            "name": "Fitness Frenzy",
+            "date": "2023-03-15 09:15:00",
+            "available_places": 22
+        },
+        {
+            "name": "Peak Performance",
+            "date": "2023-06-28 15:30:00",
+            "available_places": 17
         }
     ]
 }
