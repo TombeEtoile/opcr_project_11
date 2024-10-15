@@ -7,7 +7,6 @@
     <div class="card mx-3 border-0">
         <h2>Welcome, {{ club['name'] }} </h2>
 
-
         {% with messages = get_flashed_messages() %}
             {% if messages %}
                 <ul>
@@ -37,7 +36,7 @@
                         {% if competition['available_places']|int > 0 %}
                             {% if competition['name'] and club['name'] %}
                                 <li class="list-group-item text-center">
-                                    <a href="{{ url_for('book', competition=competition['name']|slugify, club=club['name']|slugify) }}">Reserve my places</a>
+                                    <a href="{{ url_for('book', competition=competition['name']|slugify, club=club['name']|slugify) }}">Book my places</a>
                                 </li>
                             {% endif %}
                         {% endif %}

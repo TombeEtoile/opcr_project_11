@@ -8,8 +8,7 @@
         <div class="card text-center m-2" style="width: 35rem;">
             <div class="card-header"><h2>{{ competition['name'] }}</h2></div>
             <div class="card-body">
-                <h5 class="card-title">Places available
-                    for {{ competition['name'] }}: {{ competition['available_places'] }}</h5>
+                <h5 class="card-title">Available places : {{ competition['available_places'] }}</h5>
                 <p class="card-text">Your number of points: {{ club['points'] }}</p>
                 <form action="/booking" method="post">
                     <input type="hidden" name="club" value="{{ club['name'] }}">

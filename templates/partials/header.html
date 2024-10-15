@@ -5,7 +5,7 @@
             <div class="d-flex">
                 <!-- Boutons de navigation à gauche -->
                 {% if session.get('email') %}
-                    <a href="{{ url_for('homepage') }}" class="btn btn-light mx-2" role="button">Accueil</a>
+                    <a href="{{ url_for('homepage') }}" class="btn btn-light mx-2" role="button">Homepage</a>
                 {% endif %}
                 {% if request.path != '/clubs' %}
                     <a href="{{ url_for('clubs_list') }}" class="btn btn-light mx-2" role="button">Clubs list</a>
@@ -15,17 +15,24 @@
                 {% endif %}
                 {% if not session.get('email') %}
                     {% if request.path != '/' %}
-                        <a href="{{ url_for('registration') }}" class="btn btn-light mx-2" role="button">I register</a>
+                        <a href="{{ url_for('login_and_register') }}" class="btn btn-light mx-2" role="button">
+                            Register as a club</a>
+                    {% endif %}
+                    {% if request.path != '/competition_registration' %}
+                        <a href="{{ url_for('competition_registration') }}" class="btn btn-light mx-2" role="button">
+                            Register as a competition</a>
                     {% endif %}
                 {% endif %}
             </div>
 
-            <!-- Bouton des points du club à droite -->
-            {% if session.get('email') %}
-                <a href="#" class="btn btn-light ms-auto" role="button">*club['points']*</a>
-            {% else %}
-                <a href="#" class="btn btn-light ms-auto" role="button">**register**</a>
-            {% endif %}
+            <!-- Bouton à droite -->
+            <!--
+            % if session.get('email') %}
+                <a href="#" class="btn btn-light ms-auto" role="button"><B>{ club['points'] }}</B></a>
+            % else %}
+                <a href="#" class="btn btn-light ms-auto" role="button"><i>Register to see your amount of points</i></a>
+            % endif %}
+            -->
         </div>
     </nav>
 

@@ -1,6 +1,19 @@
 import pytest
-
+from werkzeug.security import generate_password_hash
+from datetime import datetime
 from server import app
+from slugify import slugify
+
+
+fake_clubs = [
+    {"name": "Test name", "email": "test@email.co", "password": generate_password_hash("secret$"), "points": 13},
+]
+
+
+fake_competitions = [
+        {"name": "Test name 1", "date": "2020-10-22 13:30:00", "available_places": 13},
+        {"name": "Test name 2", "date": "2025-10-22 13:30:00", "available_places": 18},
+    ]
 
 
 @pytest.fixture
@@ -10,84 +23,66 @@ def client():
         yield client
 
 
-def test_homepage_data_display(client, mocker):
-    fake_clubs = [
-        {'name': 'Simply Lift', 'email': 'johnsnow@simplylift.co', 'points': '15'},
-        {'name': 'Iron Temple', 'email': 'admin@irontemple.com', 'points': '8'},
-        {'name': 'She Lifts', 'email': 'kate@shelifts.co.uk', 'points': '25'}
-    ]
-    mocker.patch('server.load_clubs', return_value=fake_clubs)
-    with client.session_transaction() as session:
-        session['email'] = 'johnsnow@simplylift.co'
-    response = client.get('/homepage')
-    assert response.status_code == 200
-    assert b'Simply Lift' in response.data
-
-
-def test_homepage_points_display(client, mocker):
-    fake_clubs = [
-        {'name': 'Simply Lift', 'email': 'john@simplylift.co', 'points': '15'},
-        {'name': 'Iron Temple', 'email': 'admin@irontemple.com', 'points': '8'},
-        {'name': 'She Lifts', 'email': 'kate@shelifts.co.uk', 'points': '25'}
-    ]
+# BDD CLUBS MOCK
+@pytest.fixture
+def mock_clubs(mocker):
     mocker.patch('server.load_clubs', return_value=fake_clubs)
 
-    with client.session_transaction() as session:
-        session['email'] = 'john@simplylift.co'
 
-    response = client.get('/homepage')
-    assert response.status_code == 200
-
-    simply_lift_points = '15'
-    expected_string = f'{simply_lift_points}'
-    expected_bytes = expected_string.encode('utf-8')
-    assert expected_bytes in response.data
-
-
-def test_competitions_display(client, mocker):
-    fake_clubs = [
-        {'name': 'Simply Lift', 'email': 'john@simplylift.co', 'points': '15'},
-        {'name': 'Iron Temple', 'email': 'admin@irontemple.com', 'points': '8'},
-        {'name': 'She Lifts', 'email': 'kate@shelifts.co.uk', 'points': '25'}
-    ]
-
-    fake_competitions = [
-        {"name": "Spring Festival Test", "date": "2020-03-27 10:00:00", "available_places": "25"},
-        {"name": "Fall Classic", "date": "2020-10-22 13:30:00", "available_places": "18"}
-    ]
-
-    mocker.patch('server.load_clubs', return_value=fake_clubs)
+# BDD COMPETITIONS MOCK
+@pytest.fixture
+def mock_competitions(mocker):
     mocker.patch('server.load_competitions', return_value=fake_competitions)
 
+
+def test_homepage_data_display(client, mock_clubs):
     with client.session_transaction() as session:
-        session['email'] = 'john@simplylift.co'
+        session['email'] = fake_clubs[0]['email']
+    response = client.get('/homepage')
+    assert response.status_code == 200
+
+    for club in fake_clubs:
+        assert club['name'].encode('utf-8') in response.data
+
+
+def test_homepage_points_display(client, mock_clubs):
+    with client.session_transaction() as session:
+        session['email'] = fake_clubs[0]['email']
 
     response = client.get('/homepage')
     assert response.status_code == 200
 
+    for club in fake_clubs:
+        assert str(club['points']).encode('utf-8') in response.data
+
+
+def test_competitions_display(client, mock_clubs, mock_competitions):
+    with client.session_transaction() as session:
+        session['email'] = fake_clubs[0]['email']
+
+    response = client.get('/homepage')
+    assert response.status_code == 200
+
+    good_competitions = []
     for competition in fake_competitions:
-        assert competition['name'].encode('utf-8') in response.data
-        assert competition['date'].encode('utf-8') in response.data
-        assert competition['available_places'].encode('utf-8') in response.data
+        competition_date = datetime.strptime(competition['date'], "%Y-%m-%d %H:%M:%S")
+        if competition_date >= datetime.now():
+            good_competitions.append(competition['name'])
+
+    assert fake_competitions[0]['name'].encode('utf-8') not in response.data
+    assert fake_competitions[1]['name'].encode('utf-8') in response.data
 
 
-def test_booking_link(client, mocker):
-    fake_clubs = [
-        {'name': 'Simply Lift', 'email': 'john@simplylift.co', 'points': '15'},
-        {'name': 'Iron Temple', 'email': 'admin@irontemple.com', 'points': '8'},
-        {'name': 'She Lifts', 'email': 'kate@shelifts.co.uk', 'points': '25'}
-    ]
-
-    fake_competitions = [
-        {"name": "Spring Festival Test", "date": "2020-03-27 10:00:00", "available_places": "25"},
-        {"name": "Fall Classic", "date": "2020-10-22 13:30:00", "available_places": "18"}
-    ]
-
-    mocker.patch('server.load_clubs', return_value=fake_clubs)
-    mocker.patch('server.load_competitions', return_value=fake_competitions)
-
+def test_booking_link(client, mock_clubs, mock_competitions):
     with client.session_transaction() as session:
-        session['email'] = 'john@simplylift.co'
+        session['email'] = fake_clubs[0]['email']
+
+    club_name = slugify(fake_clubs[0]['name'], separator='-')
+    competition_name = slugify(fake_competitions[1]['name'], separator='-')
 
     response = client.get('/homepage')
     assert response.status_code == 200
+
+    expected_link = f'/book/{competition_name}/{club_name}'
+    assert b'Book my place' in response.data
+    assert expected_link.encode('utf-8') in response.data

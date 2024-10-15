@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{% block title %}GUDLFT Registration{% endblock title %}
+
+{% block content %}
+
+    <div class="card mx-3 border-0">
+        <h1>Welcome to the GUDLFT Registration Portal!</h1>
+
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul>
+                    {% for message in messages %}
+                        <li><i>{{ message }}</i></li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+    </div>
+
+    <div class="container d-flex justify-content-between" style="width: 100%;">
+        <!-- Formulaire de connexion -->
+        <div class="card my-1 mx-1" style="width: 45%;">
+            <div class="card-body">
+                <h5 class="card-title">Login</h5>
+                <form action="/" method="post">
+                    <input type="hidden" name="form_type" value="login">
+                    <div class="mb-3">
+                        <label for="loginEmail" class="form-label">Email address</label>
+                        <input type="email" name="email" class="form-control" id="loginEmail"
+                               aria-describedby="emailHelp">
+                        <div id="emailHelp" class="form-text"><i>We'll never share your email with anyone else.</i></div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="loginPassword" class="form-label">Password</label>
+                        <input type="password" name="password" class="form-control" id="loginPassword">
+                        <div id="emailHelp" class="form-text"><i>And neither is your password ;)</i></div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Login</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Formulaire d'inscription -->
+        <div class="card my-1 mx-1" style="width: 45%;">
+            <div class="card-body">
+                <h5 class="card-title">Register</h5>
+                <form action="/" method="post">
+                    <input type="hidden" name="form_type" value="register">
+                    <div class="mb-3">
+                        <label for="clubName" class="form-label">Club name</label>
+                        <input type="text" name="name" class="form-control" id="clubName">
+                    </div>
+                    <div class="mb-3">
+                        <label for="registerEmail" class="form-label">Email address</label>
+                        <input type="email" name="email" class="form-control" id="registerEmail">
+                        <div id="emailHelp" class="form-text"><i>We'll never share your email with anyone else.</i></div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="registerPassword" class="form-label">Password</label>
+                        <input type="password" name="password" class="form-control" id="registerPassword">
+                        <div id="emailHelp" class="form-text"><i>And neither is your password ;)</i></div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Register</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

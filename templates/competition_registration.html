@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block title %}GUDLFT Registration{% endblock title %}
+
+{% block content %}
+
+    <div class="container d-flex justify-content-between" style="width: 100%;">
+
+        <div class="card mx-3 border-0">
+            <h1>Welcome to the GUDLFT Registration Portal!</h1>
+
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    <ul>
+                        {% for message in messages %}
+                            <li><i>{{ message }}</i></li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            {% endwith %}
+        </div>
+        <div class="container d-flex justify-content-between" style="width: 100%;">
+            <div class="card my-1 mx-1" style="width: 45%;">
+                <div class="card-body">
+                    <h5 class="card-title">Register</h5>
+                    <form action="/competition_registration" method="post">
+                        <div class="mb-3">
+                            <label for="clubName" class="form-label">Club name</label>
+                            <input type="text" name="name" class="form-control" id="clubName">
+                        </div>
+                        <div class="mb-3">
+                            <label for="registerDate" class="form-label">Date</label>
+                            <input type="date" name="date" class="form-control" id="registerDate">
+                            <div id="dateHelp" class="form-text"><i>Enter the start date of the competition.</i></div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="registerTime" class="form-label">Hourly</label>
+                            <input type="time" name="time" class="form-control" id="registerTime">
+                            <div id="timeHelp" class="form-text"><i>Enter the start time of the competition.</i></div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="registerAvailablePlaces" class="form-label">Available places</label>
+                            <input type="number" name="available_places" class="form-control"
+                                   id="registerAvailablePlaces">
+                            <div id="availablePlacesHelp" class="form-text">
+                                <i>Enter the number of places your competition is ready to accommodate</i>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Upload</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}

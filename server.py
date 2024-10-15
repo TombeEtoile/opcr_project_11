@@ -1,5 +1,7 @@
 import json
+from datetime import datetime
 from flask import Flask, render_template, request, redirect, flash, url_for, session
+from werkzeug.security import generate_password_hash, check_password_hash
 from slugify import slugify
 
 
@@ -35,18 +37,105 @@ app.jinja_env.filters['slugify'] = slugify
 
 
 @app.route('/', methods=['GET', 'POST'])
-def registration():
-
+def login_and_register():
+    # LOGIN
     if request.method == 'POST':
-        email = request.form['email']
-        club = next((club for club in load_clubs() if club['email'] == email), None)
-        if club:
-            session['email'] = email
-            return redirect(url_for('homepage'))
-        else:
-            flash("Email non valide. Veuillez réessayer.")
-            return redirect(url_for('registration'))
-    return render_template('registration.html')
+        form_type = request.form['form_type']
+
+        if form_type == 'login':
+            email = request.form['email']
+            password = request.form['password']
+            club = next((club for club in load_clubs() if club['email'] == email), None)
+
+            if club and check_password_hash(club['password'], password):
+                session['email'] = email
+                return redirect(url_for('homepage'))
+
+            else:
+                flash("Invalid email or password. Please try again.")
+                return redirect(url_for('login_and_register'))
+
+        # REGISTER
+        elif form_type == 'register':
+            name = request.form['name']
+            email = request.form['email']
+            password = request.form['password']
+
+            hashed_password = generate_password_hash(password, method='pbkdf2:sha256')
+
+            with open("clubs.json", "r") as file:
+                clubs = json.load(file)
+
+            if any(club['email'] == email for club in clubs['clubs']):
+                flash("This email is already in use. Please choose another one.")
+                return redirect(url_for('login_and_register'))
+
+            new_club = \
+                {
+                    'name': name,
+                    'email': email,
+                    'password': hashed_password,
+                    'points': 15
+                }
+
+            if new_club['email'] == '':
+                flash("Please enter an email address.")
+                return redirect(url_for('login_and_register'))
+
+            if '@' not in new_club['email']:
+                flash("Please enter a valid email address.")
+                return redirect(url_for('login_and_register'))
+
+            special_characters = "!@#$%^&*()_+-=[]{}|;':,./<>?"
+            if not any(char in special_characters for char in new_club['password']):
+                flash("Please enter a password containing at least one special character "
+                      "(!@#$%^&*()_+-=[]{}|;':,./<>?).")
+                return redirect(url_for('login_and_register'))
+
+            clubs['clubs'].append(new_club)
+
+            with open("clubs.json", "w") as c:
+                json.dump(clubs, c, indent=4)
+
+            return redirect(url_for('login_and_register'))
+
+    return render_template('login_and_register.html')
+
+
+@app.route('/competition_registration', methods=['GET', 'POST'])
+def competition_registration():
+    if request.method == 'POST':
+        name = request.form['name']
+        date = request.form['date']
+        time = request.form['time']
+        available_places = int(request.form['available_places'])
+
+        with open('competitions.json', 'r') as file:
+            competitions = json.load(file)
+
+        new_competition = \
+            {
+                'name': name,
+                'date': f'{date} {time}',
+                'available_places': available_places
+            }
+
+        if date <= str(datetime.now()):
+            flash("The start date of the competition cannot be lower than today.")
+            return redirect(url_for('competition_registration'))
+
+        if available_places <= 0:
+            flash("The number of places available must be at least 1.")
+            return redirect(url_for('competition_registration'))
+
+        competitions['competitions'].append(new_competition)
+
+        with open('competitions.json', 'w') as c:
+            json.dump(competitions, c, indent=4)
+        flash('Your competition has been registered in the database. Clubs can now register for your event.')
+        return redirect(url_for('competition_registration'))
+
+    return render_template('competition_registration.html')
 
 
 @app.route('/homepage')
@@ -54,12 +143,20 @@ def homepage():
     email = session.get('email')
     if not email:
         flash("Accès non autorisé.")
-        return redirect(url_for('registration'))
+        return redirect(url_for('login_and_register'))
     club = next((club for club in load_clubs() if club['email'] == email), None)
+
+    competitions_good_date = []
+    for competition in load_competitions():
+        if competition['date'] >= str(datetime.now()):
+            competitions_good_date.append(competition)
+            # trier compétitions
+
     if not club:
         flash("Club non trouvé.")
-        return redirect(url_for('registration'))
-    return render_template('homepage.html', club=club, competitions=load_competitions())
+        return redirect(url_for('login_and_register'))
+    return render_template('homepage.html', club=club, competitions=competitions_good_date)
+    # return render_template('homepage.html', club=club, competitions=load_competitions())
 
 
 @app.route('/book/<competition>/<club>')
@@ -141,4 +238,4 @@ def clubs_list():
 def logout():
     session.pop('email', None)
     flash("Vous avez été déconnecté.")
-    return redirect(url_for('registration'))
+    return redirect(url_for('login_and_register'))

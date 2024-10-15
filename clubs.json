@@ -1,69 +1,100 @@
 {
     "clubs": [
         {
+            "name": "Augustin Verdier",
+            "email": "aug.verdier@gmail.com",
+            "password": "pbkdf2:sha256:600000$ITQMvxoGGVnBViKH$44439eadd6fe4d08031ce085cdc547ea136684a96270a0206efd76b11abaa362",
+            "points": 6
+        },
+        {
+            "name": "Test1",
+            "email": "test.1@gmail.com",
+            "password": "pbkdf2:sha256:600000$BPNAySceUcHVSkmU$31e6d2e35b1143c3324339a091008bcdf6edad45413f2aa1a676c24e02d24c1e",
+            "points": 15
+        },
+        {
+            "name": "Test2",
+            "email": "test.2@gmail.com",
+            "password": "pbkdf2:sha256:600000$1hEgqCXp6kiprImT$04b6f75bfffcd3ee34c6eabbb27f7ec76f6b992cb7d8cf5deca4abff16c4187e",
+            "points": 13
+        },
+        {
+            "name": "Test3",
+            "email": "test.3@gmail.com",
+            "password": "pbkdf2:sha256:600000$Lp39mqcX7SDG7urU$4a2e368eb0ad138c5dc6f932ce8ef50425673f38b300e83051f4107146215d35",
+            "points": 15
+        },
+        {
             "name": "Simply Lift",
             "email": "john@simplylift.co",
-            "points": 3
+            "password": "pbkdf2:sha256:600000$cBCZe3MirjpNcgGK$305eebb4d0391e0816cf3a2e680adcb4e4b987fc3dca4996fec82837322d2f2a",
+            "points": 12
         },
         {
             "name": "Iron Temple",
             "email": "admin@irontemple.com",
-            "points": 4
+            "password": "pbkdf2:sha256:600000$ZKtsXMEZdK9SPSJu$4161b2be3b3dd8e5cdeddbf3c5aaa0d74bb7db59ab68690dd4a6b60145d991cd",
+            "points": 15
         },
         {
             "name": "She Lifts",
             "email": "kate@shelifts.co.uk",
-            "points": 12
-        },
-        {
-            "name": "Powerhouse Gym",
-            "email": "info@powerhousegym.com",
-            "points": 8
-        },
-        {
-            "name": "The Muscle Factory",
-            "email": "contact@musclefactory.com",
-            "points": 10
-        },
-        {
-            "name": "Strong Arms",
-            "email": "hello@strongarms.com",
+            "password": "pbkdf2:sha256:600000$3BZQTrgHEhcyCNE6$9f0fd8fed4ade7895431e183ea67a417c32da9a2c2d5e6816ca6027b0b88632b",
             "points": 15
         },
         {
-            "name": "Beast Mode",
-            "email": "beast@beastmode.com",
-            "points": 6
+            "name": "Test4",
+            "email": "test.4@gmail.com",
+            "password": "pbkdf2:sha256:600000$sab5pDSijwAq73qb$7ed0e7af50c68cac22260f3f58db8452ce27e227ae1a7e9e3a4dac64adbead1e",
+            "points": 10
         },
         {
-            "name": "The Fitness Hub",
-            "email": "info@fitnesshub.com",
-            "points": 9
+            "name": "",
+            "email": "fake.email@gmail.com",
+            "password": "pbkdf2:sha256:600000$c92KG1OlcmRbyiQV$72a643cb107847ab8c6a28f7a86a59e49b5f7139729566c1bd15713c2a41a671",
+            "points": 15
         },
         {
-            "name": "Lift Heavy",
-            "email": "contact@liftheavy.com",
-            "points": 7
+            "name": "Bad name",
+            "email": "bad.email@email.co",
+            "password": "pbkdf2:sha256:600000$UosZEpHBMe5Im9jy$c9a8079ac068af95c90625c13dce6d0806bc774a646c6699ab389a3b0cd7a141",
+            "points": 15
         },
         {
-            "name": "Power Surge",
-            "email": "powersurge@powersurge.com",
-            "points": 14
+            "name": "Bad name",
+            "email": "test@email.co",
+            "password": "pbkdf2:sha256:600000$n7K2KonJY8eH5HDo$bc40c86d4a1b84661d8dbc9b369ddca9faf73408f2ee4447a655d91800df7e7f",
+            "points": 15
         },
         {
-            "name": "Endurance Gym",
-            "email": "info@endurancegym.com",
-            "points": 11
+            "name": "Test7",
+            "email": "test.7@gmail.com",
+            "password": "pbkdf2:sha256:600000$QseXWkIudI6OI2OG$84b05cb3832b2e7b383b7fdb04fdfbb4070ee7dafb4946b7517c3eb67de3ccac",
+            "points": 15
         },
         {
-            "name": "Fit Nation",
-            "email": "support@fitnation.com",
-            "points": 5
+            "name": "Test10",
+            "email": "test.10@gmail.com",
+            "password": "pbkdf2:sha256:600000$FRjlQZh0lotocwVN$0907b4cdc422ed0fe18e9ee2719955668ddbbe205d28d79c7ebc2880d3219977",
+            "points": 15
         },
         {
-            "name": "Peak Performance",
-            "email": "info@peakperformance.com",
-            "points": 13
+            "name": "Test11",
+            "email": "test.11@gmail.com",
+            "password": "pbkdf2:sha256:600000$HZNRKiJai6gSMlJg$279881e62d584258aa05a37673bfacac351731aaa96a6661f339766e377b7c75",
+            "points": 15
+        },
+        {
+            "name": "xwxcxw",
+            "email": "aucxvxg.verdier@gmail.com",
+            "password": "pbkdf2:sha256:600000$VySy2InAHcRVBIMS$bb09a04e1f413d40d927ff2b3b446e91fc97a788d9cbfe5ebeeec93e0c15952c",
+            "points": 15
+        },
+        {
+            "name": "TestLocust",
+            "email": "test.locust@gmail.com",
+            "password": "pbkdf2:sha256:600000$wtc3CyK7oWfJXNEJ$8da285cc001946c0227f2b95561329578121d905ae8eedf5bba8c2d65046937d",
+            "points": 15
         }
     ]
 }
