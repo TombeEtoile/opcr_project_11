@@ -2,21 +2,16 @@
 
 Bienvenue dans le projet GUDLFT Registration & Booking System. Ce projet est une application web qui permet aux clubs de fitness de s'enregistrer, de se connecter, et de réserver des places pour des compétitions. Le système gère les compétitions, les clubs et leurs points pour faciliter les réservations et l'organisation d'événements sportifs.
 
-## Fonctionnalités principales
-### Enregistrement et connexion des clubs : 
-Les clubs peuvent créer un compte avec leur nom, email, et un mot de passe sécurisé.
-
-### Réservation de places pour des compétitions : 
-Les clubs peuvent réserver des places dans différentes compétitions sportives, sous réserve des places disponibles et de leurs points.
-### Gestion des points des clubs : 
-Les clubs disposent d'un certain nombre de points à dépenser pour réserver des places dans les compétitions.
-### Affichage des compétitions actuelles : 
-Seules les compétitions futures (dont la date n'est pas encore passée) sont affichées sur la page d'accueil.
-### Pagination des compétitions : 
-Système de pagination pour naviguer parmi les nombreuses compétitions.
+## Fonctionnalités principales 
+- **Enregistrement et connexion des clubs :** Les clubs peuvent créer un compte avec leur nom, email, et un mot de passe sécurisé.
+- **Réservation de places pour des compétitions :** Les clubs peuvent réserver des places dans différentes compétitions sportives, sous réserve des places disponibles et de leurs points.
+- **Gestion des points des clubs :** Les clubs disposent d'un certain nombre de points à dépenser pour réserver des places dans les compétitions.
+- **Affichage des compétitions actuelles :** Seules les compétitions futures (dont la date n'est pas encore passée) sont affichées sur la page d'accueil.
+- **Pagination des compétitions :** Système de pagination pour naviguer parmi les nombreuses compétitions.
 
 
 ## Prérequis
+Liste des dépendances utilisées dans le projet (extrait du ```requirements.txt```) :
 ```
 blinker==1.8.2
 Brotli==1.1.0
@@ -170,3 +165,6 @@ Exécuter Locust pour tester les performances :
 locust
 ```
 Puis ouvrez votre navigateur et accédez à **http://localhost:8089** pour interagir avec l'interface Locust.
+
+### Exemple de script Locust
+Un exemple de test Locust est fourni dans le fichier ```locustfile.py``` à la racine du projet pour tester les routes de connexion, d'enregistrement et de réservation.
