@@ -97,6 +97,7 @@ def login_and_register():
             with open("clubs.json", "w") as c:
                 json.dump(clubs, c, indent=4)
 
+            flash("Your club has been registered.")
             return redirect(url_for('login_and_register'))
 
     return render_template('login_and_register.html')
@@ -150,7 +151,6 @@ def homepage():
     for competition in load_competitions():
         if competition['date'] >= str(datetime.now()):
             competitions_good_date.append(competition)
-            # trier compétitions
 
     if not club:
         flash("Club non trouvé.")
@@ -196,6 +196,13 @@ def purchase_places():
         return redirect(url_for('book',
                                 competition=slugify(competition['name'], separator='-'),
                                 club=slugify(club['name'], separator='-')))
+
+    elif places_required > 12:
+        flash("You cannot reserve more than 12 places.")
+        return redirect(url_for('book',
+                                competition=slugify(competition['name'], separator='-'),
+                                club=slugify(club['name'], separator='-')))
+
     else:
         # CLUB UPDATED DATA
         with open('clubs.json', 'r') as f:
@@ -220,6 +227,8 @@ def purchase_places():
 
         with open("competitions.json", "w") as c:
             json.dump(data, c, indent=4)
+        flash(f"Your reservation of {places_required} places in the {competition['name']} "
+              f"competition has been taken into account.")
         return redirect(url_for('homepage'))
 
 

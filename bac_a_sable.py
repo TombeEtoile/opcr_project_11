@@ -1,28 +1,18 @@
-import json
-from datetime import datetime
-from flask import Flask, render_template, request, redirect, flash, url_for, session
-from werkzeug.security import generate_password_hash, check_password_hash
+from werkzeug.security import generate_password_hash
 from slugify import slugify
 
+fake_competitions = [
+    {"name": "Test Competition", "date": "2025-10-22 13:30:00", "available_places": 25},
+]
 
-def load_clubs():
-    with open('clubs.json') as c:
-        list_of_clubs = json.load(c)['clubs']
-        return list_of_clubs
+# Mock des clubs
+fake_clubs = [
+    {"name": "Test Club", "email": "testclub@example.com", "points": 10, "password": generate_password_hash("password123")},
+]
 
+club_slug = slugify(fake_clubs[0]['name'], separator='-')
+competition_slug = slugify(fake_competitions[0]['name'], separator='-')
 
-def load_competitions():
-    with open('competitions.json') as comps:
-        list_of_competitions = json.load(comps)['competitions']
-        return list_of_competitions
-
-
-competitions = load_competitions()
-
-competitions_good_date = []
-for competition in load_competitions():
-    if competition['date'] >= str(datetime.now()):
-        competitions_good_date.append(sorted(competition))
-
-print(competitions_good_date)
-print(datetime.now())
+print(club_slug)
+print(competition_slug)
+print(f'/book/{competition_slug}/{club_slug}')

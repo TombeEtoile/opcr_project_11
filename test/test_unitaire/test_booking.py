@@ -106,10 +106,12 @@ def test_too_high_ask_from_club(client, mocker):
 
     with client.session_transaction() as session:
         session['email'] = 'johnsnow@simplylift.co'
+
     competition_name = (slugify(competition['name'], separator='-') for competition in fake_competitions)
     clean_competition_name = list(competition_name)
     club_name = (slugify(club['name'], separator='-') for club in fake_clubs)
     clean_club_name = list(club_name)
+
     for comp, club in zip(clean_competition_name, clean_club_name):
         response = client.get(f'/book/{comp}/{club}')
         assert response.status_code == 200

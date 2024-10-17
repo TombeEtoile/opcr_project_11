@@ -13,6 +13,7 @@ fake_clubs = [
 fake_competitions = [
         {"name": "Test name 1", "date": "2020-10-22 13:30:00", "available_places": 13},
         {"name": "Test name 2", "date": "2025-10-22 13:30:00", "available_places": 18},
+        {"name": "Test name 3", "date": "2025-10-22 13:30:00", "available_places": 0},
     ]
 
 
@@ -73,16 +74,35 @@ def test_competitions_display(client, mock_clubs, mock_competitions):
     assert fake_competitions[1]['name'].encode('utf-8') in response.data
 
 
-def test_booking_link(client, mock_clubs, mock_competitions):
+def test_booking_link_with_places(client, mock_clubs, mock_competitions):
     with client.session_transaction() as session:
         session['email'] = fake_clubs[0]['email']
 
     club_name = slugify(fake_clubs[0]['name'], separator='-')
-    competition_name = slugify(fake_competitions[1]['name'], separator='-')
+
+    competition_name_with_places = slugify(fake_competitions[1]['name'], separator='-')
 
     response = client.get('/homepage')
     assert response.status_code == 200
 
-    expected_link = f'/book/{competition_name}/{club_name}'
-    assert b'Book my place' in response.data
-    assert expected_link.encode('utf-8') in response.data
+    link_to_competition_with_places = f'/book/{competition_name_with_places}/{club_name}'
+
+    assert b'Book my places' in response.data
+    assert link_to_competition_with_places.encode('utf-8') in response.data
+
+
+def test_booking_link_without_places(client, mock_clubs, mock_competitions):
+    with client.session_transaction() as session:
+        session['email'] = fake_clubs[0]['email']
+
+    club_name = slugify(fake_clubs[0]['name'], separator='-')
+
+    competition_name_without_places = slugify(fake_competitions[2]['name'], separator='-')
+
+    response = client.get('/homepage')
+    assert response.status_code == 200
+
+    link_to_competition_without_places = f'/book/{competition_name_without_places}/{club_name}'
+
+    assert b'This competition is complete' in response.data
+    assert link_to_competition_without_places.encode('utf-8') not in response.data

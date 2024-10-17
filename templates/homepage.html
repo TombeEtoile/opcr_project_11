@@ -33,10 +33,14 @@
                         <li class="list-group-item text-center">Number of
                             Places: {{ competition['available_places'] }}</li>
 
-                        {% if competition['available_places']|int > 0 %}
-                            {% if competition['name'] and club['name'] %}
+                        {% if competition['name'] and club['name'] %}
+                            {% if competition['available_places']|int > 0 %}
                                 <li class="list-group-item text-center">
                                     <a href="{{ url_for('book', competition=competition['name']|slugify, club=club['name']|slugify) }}">Book my places</a>
+                                </li>
+                            {% else %}
+                                <li class="list-group-item text-center">
+                                    <p><i>This competition is complete</i></p>
                                 </li>
                             {% endif %}
                         {% endif %}
