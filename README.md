@@ -1,51 +1,173 @@
-# gudlift-registration
+# GUDLFT Registration & Booking System
 
-1. Why
+Bienvenue dans le projet GUDLFT Registration & Booking System. Ce projet est une application web qui permet aux clubs de fitness de s'enregistrer, de se connecter, et de réserver des places pour des compétitions. Le système gère les compétitions, les clubs et leurs points pour faciliter les réservations et l'organisation d'événements sportifs.
 
-
-    This is a proof of concept (POC) project to show a light-weight version of our competition booking platform. The aim is the keep things as light as possible, and use feedback from the users to iterate.
-
-2. Getting Started
-
-    This project uses the following technologies:
-
-    * Python v3.x+
-
-    * [Flask](https://flask.palletsprojects.com/en/1.1.x/)
-
-        Whereas Django does a lot of things for us out of the box, Flask allows us to add only what we need. 
-     
-
-    * [Virtual environment](https://virtualenv.pypa.io/en/stable/installation.html)
-
-        This ensures you'll be able to install the correct packages without interfering with Python on your machine.
-
-        Before you begin, please ensure you have this installed globally. 
+## Fonctionnalités principales 
+- **Enregistrement et connexion des clubs :** Les clubs peuvent créer un compte avec leur nom, email, et un mot de passe sécurisé.
+- **Réservation de places pour des compétitions :** Les clubs peuvent réserver des places dans différentes compétitions sportives, sous réserve des places disponibles et de leurs points.
+- **Gestion des points des clubs :** Les clubs disposent d'un certain nombre de points à dépenser pour réserver des places dans les compétitions.
+- **Affichage des compétitions actuelles :** Seules les compétitions futures (dont la date n'est pas encore passée) sont affichées sur la page d'accueil.
+- **Pagination des compétitions :** Système de pagination pour naviguer parmi les nombreuses compétitions.
 
 
-3. Installation
+## Prérequis
+Liste des dépendances utilisées dans le projet (extrait du ```requirements.txt```) :
+```
+blinker==1.8.2
+Brotli==1.1.0
+certifi==2024.8.30
+charset-normalizer==3.3.2
+click==8.1.7
+ConfigArgParse==1.7
+coverage==7.6.3
+datetype==2024.2.28
+flake8==7.0.0
+flake8-html==0.4.3
+Flask==3.0.3
+Flask-Cors==5.0.0
+Flask-Login==0.6.3
+gevent==24.2.1
+geventhttpclient==2.3.1
+greenlet==3.1.1
+idna==3.10
+iniconfig==2.0.0
+itsdangerous==2.2.0
+Jinja2==3.1.3
+locust==2.31.8
+MarkupSafe==2.1.5
+mccabe==0.7.0
+msgpack==1.1.0
+npm==0.1.1
+optional-django==0.1.0
+packaging==24.1
+pillow==10.3.0
+pluggy==1.5.0
+psutil==6.0.0
+pycodestyle==2.11.1
+pyflakes==3.2.0
+Pygments==2.17.2
+pytest==8.3.3
+pytest-flask==1.3.0
+pytest-mock==3.14.0
+python-slugify==8.0.4
+pyzmq==26.2.0
+requests==2.32.3
+setuptools==75.1.0
+text-unidecode==1.3
+urllib3==2.2.3
+Werkzeug==3.0.4
+zope.event==5.0
+zope.interface==7.0.3
+```
 
-    - After cloning, change into the directory and type <code>virtualenv .</code>. This will then set up a a virtual python environment within that directory.
 
-    - Next, type <code>source bin/activate</code>. You should see that your command prompt has changed to the name of the folder. This means that you can install packages in here without affecting affecting files outside. To deactivate, type <code>deactivate</code>
+## Installation
+### Cloner le projet :
 
-    - Rather than hunting around for the packages you need, you can install in one step. Type <code>pip install -r requirements.txt</code>. This will install all the packages listed in the respective file. If you install a package, make sure others know by updating the requirements.txt file. An easy way to do this is <code>pip freeze > requirements.txt</code>
+```
+git clone https://github.com/TombeEtoile/opcr_project_11.git
+```
+### Se rendre sur le projet
+```
+cd opcr_project_11
+```
+### puis
+```
+cd Python_Testing
+```
 
-    - Flask requires that you set an environmental variable to the python file. However you do that, you'll want to set the file to be <code>server.py</code>. Check [here](https://flask.palletsprojects.com/en/1.1.x/quickstart/#a-minimal-application) for more details
+### Installer les dépendances :
+```
+pip install -r requirements.txt
+```
 
-    - You should now be ready to test the application. In the directory, type either <code>flask run</code> or <code>python -m flask run</code>. The app should respond with an address you should be able to go to using your browser.
+### Configurer les bases de données JSON :
 
-4. Current Setup
+Assurez-vous que les fichiers clubs.json et competitions.json sont présents dans le répertoire racine pour stocker les informations sur les clubs et les compétitions.
 
-    The app is powered by [JSON files](https://www.tutorialspoint.com/json/json_quick_guide.htm). This is to get around having a DB until we actually need one. The main ones are:
-     
-    * competitions.json - list of competitions
-    * clubs.json - list of clubs with relevant information. You can look here to see what email addresses the app will accept for login.
+#### Exemple de contenu de clubs.json :
+``` json
+{
+  "clubs": [
+    {
+      "name": "Nom Club",
+      "email": "nomclub@gmail.com",
+      "points": 12,
+      "password": "$2b$12$h...hashé" 
+    }
+  ]
+}
+```
+#### Exemple de contenu de competitions.json :
+``` json
+{
+  "competitions": [
+    {
+      "name": "Nom Competition",
+      "date": "2024-10-30 14:56",
+      "available_places": 25
+    }
+  ]
+}
+```
 
-5. Testing
+## Exécution de l'Application
 
-    You are free to use whatever testing framework you like-the main thing is that you can show what tests you are using.
+### Lancer le serveur Flask :
+(route = /opcr_project_11/Python_Testing/)
+```
+flask run
+```
+L'application sera disponible à l'adresse http://127.0.0.1:5000.
 
-    We also like to show how well we're testing, so there's a module called 
-    [coverage](https://coverage.readthedocs.io/en/coverage-5.1/) you should add to your project.
+### Naviguer sur l'application :
 
+#### /
+Connexion et enregistrement
+#### /competition_registration
+Mise en ligne d'une ccompétition
+#### /homepage
+Homepage (affichage de toutes les compétitions à venir)
+#### /clubs
+Liste de tous les clubs
+#### /< nom-competition>/< nom-club>
+Page de réservation de la compétition ciblée dans l'url
+#### /logout
+Page de déconnexion (302 --> "/")
+
+
+## Tests
+
+### Tests Unitaires (Pytest)
+#### Exécuter les tests unitaires :
+
+```
+pytest
+```
+
+### Couverture des tests :
+
+#### Couverture des tests en format txt :
+
+```
+coverage report
+```
+
+#### Visualiser la couverture des tests :
+```
+coverage html
+```
+Ensuite, ouvrez htmlcov/index.html dans votre navigateur pour une analyse détaillée.
+
+### Tests de Performance (Locust)
+Exécuter Locust pour tester les performances :
+```
+locust
+```
+Puis ouvrez votre navigateur et accédez à **http://localhost:8089** pour interagir avec l'interface Locust.
+
+### Exemple de script Locust
+Un exemple de test Locust est fourni dans le fichier ```locustfile.py``` à la racine du projet pour tester les routes de connexion, d'enregistrement et de réservation.
+
+## Conclusion
+Ce projet GUDLFT permet une gestion fluide des compétitions et des réservations de ces dernières pour les clubs de sport. Grâce aux tests unitaires avec Pytest et aux tests de performance avec Locust, le système est bien couvert et optimisé pour garantir une expérience utilisateur fluide.
