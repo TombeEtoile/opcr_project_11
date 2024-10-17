@@ -168,3 +168,6 @@ Puis ouvrez votre navigateur et accédez à **http://localhost:8089** pour inter
 
 ### Exemple de script Locust
 Un exemple de test Locust est fourni dans le fichier ```locustfile.py``` à la racine du projet pour tester les routes de connexion, d'enregistrement et de réservation.
+
+## Conclusion
+Ce projet GUDLFT permet une gestion fluide des compétitions et des réservations de ces dernières pour les clubs de sport. Grâce aux tests unitaires avec Pytest et aux tests de performance avec Locust, le système est bien couvert et optimisé pour garantir une expérience utilisateur fluide.
