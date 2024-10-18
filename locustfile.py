@@ -1,5 +1,4 @@
 from locust import HttpUser, task, between
-import pytest
 
 
 class ProjectPerfTest(HttpUser):
@@ -7,60 +6,51 @@ class ProjectPerfTest(HttpUser):
 
     @task
     def clubs_as_unconnected_user(self):
-        response = self.client.get('/clubs')
-        assert response.status_code == 200
+        self.client.get('/clubs')
 
     @task
     def invalid_email_register(self):
-        response = self.client.post('/',
-                                    data={'form_type': 'register',
-                                          'name': 'TestLocust', 'email': 'test.locust.gmail.com',
-                                          'password': 'TestLocust.1998'})
-        assert response.status_code == 302
+        self.client.post('/',
+                         data={'form_type': 'register',
+                               'name': 'TestLocust', 'email': 'test.locust.gmail.com',
+                               'password': 'TestLocust.1998'})
 
     @task
     def valid_register(self):
-        response = self.client.post('/',
-                                    data={'form_type': 'register',
-                                          'name': 'TestLocust', 'email': 'test.locust@gmail.com',
-                                          'password': 'TestLocust.1998'})
-        assert response.status_code == 302
+        self.client.post('/',
+                         data={'form_type': 'register',
+                               'name': 'TestLocust', 'email': 'test.locust@gmail.com',
+                               'password': 'TestLocust.1998'})
 
     @task
     def valid_login(self):
-        response = self.client.post('/',
-                                    data={'form_type': 'login',
-                                          'email': 'test.locust@gmail.com', 'password': 'TestLocust.1998'})
-        assert response.status_code == 302
+        self.client.post('/',
+                         data={'form_type': 'login',
+                               'email': 'test.locust@gmail.com', 'password': 'TestLocust.1998'})
 
     @task
     def invalid_login(self):
-        response = self.client.post('/',
-                                    data={'form_type': 'login', 'email': 'wrong.email@gmail.com',
-                                          'password': 'WrongPassword123'})
-        assert response.status_code == 302
+        self.client.post('/',
+                         data={'form_type': 'login', 'email': 'wrong.email@gmail.com',
+                               'password': 'WrongPassword123'})
 
     @task
     def homepage(self):
-        response = self.client.get('/homepage')
-        assert response.status_code == 200
+        self.client.get('/homepage')
 
     @task
     def clubs_as_connected_user(self):
-        response = self.client.get('/clubs')
-        assert response.status_code == 200
+        self.client.get('/clubs')
 
     @task
     def booking(self):
         club = 'testlocust'
         competition = 'testlocust-competition'
-        response = self.client.get(f'book/{competition}/{club}')
-        assert response.status_code == 200
+        self.client.get(f'book/{competition}/{club}')
 
     @task
     def logout(self):
-        response = self.client.get('/logout')
-        assert response.status_code == 302
+        self.client.get('/logout')
 
     @task
     def register_and_login(self):

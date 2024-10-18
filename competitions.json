@@ -58,7 +58,7 @@
         {
             "name": "Peak Performance",
             "date": "2025-06-28 15:30",
-            "available_places": 15
+            "available_places": 12
         },
         {
             "name": "Test competition 6",
@@ -69,6 +69,11 @@
             "name": "Test competition 7",
             "date": "2024-10-30 14:56",
             "available_places": 19
+        },
+        {
+            "name": "TEST 1000",
+            "date": "2024-10-26 16:11",
+            "available_places": 5
         }
     ]
 }

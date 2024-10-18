@@ -1,0 +1,20 @@
+Name                                                  Stmts   Miss  Cover
+-------------------------------------------------------------------------
+server.py                                               158     30    81%
+test/__init__.py                                          0      0   100%
+test/test_fonctionnel/__init__.py                         0      0   100%
+test/test_fonctionnel/test_booking.py                    30      0   100%
+test/test_fonctionnel/test_club_login.py                 18      0   100%
+test/test_fonctionnel/test_club_registration.py          15      1    93%
+test/test_unitaire/__init__.py                            0      0   100%
+test/test_unitaire/test_booking.py                       82      0   100%
+test/test_unitaire/test_clubs.py                         34      0   100%
+test/test_unitaire/test_competition_registration.py      32      0   100%
+test/test_unitaire/test_database.py                      26      0   100%
+test/test_unitaire/test_footer.py                        21      0   100%
+test/test_unitaire/test_header.py                        73      1    99%
+test/test_unitaire/test_homepage.py                      64      0   100%
+test/test_unitaire/test_login_and_register.py            55      0   100%
+test/test_unitaire/test_logout.py                        25      1    96%
+-------------------------------------------------------------------------
+TOTAL                                                   633     33    95%

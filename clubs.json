@@ -4,7 +4,7 @@
             "name": "Augustin Verdier",
             "email": "aug.verdier@gmail.com",
             "password": "pbkdf2:sha256:600000$ITQMvxoGGVnBViKH$44439eadd6fe4d08031ce085cdc547ea136684a96270a0206efd76b11abaa362",
-            "points": 36
+            "points": 33
         },
         {
             "name": "Test1",
